@@ -25,5 +25,53 @@
         </div>
     </div>
     <script src="jquery.min.js"></script>
+    <script>
+        var SAMPLE = {
+            init: function() {
+                this.setParameters();
+                this.setScrollPosition();
+                this.setWidth();
+                this.bindEvent();
+            },
+            setParameters: function() {
+                this.$window = $(window);
+                this.$container = $('.wrap');
+                this.$svg = $('#imageMask')
+                this.$img = this.$container.find('image');
+                this.translatePosition = 0;
+            },
+            bindEvent: function() {
+                var myself = this;
+                this.$window.on('resize', function(){
+                    if(myself.timer !== false) {
+                    clearTimeout(myself.timer);
+                    }
+                    myself.timer = setTimeout($.proxy(myself.setWidth, myself), 200);
+                });
+
+                this.$window.on('scroll', $.proxy(this.setScrollPosition, this));
+            },
+            setWidth: function() {
+                var width = this.$window.width();
+                if(width === this.windowWidth) return;
+                this.windowWidth = this.$window.width();
+                if(width <= 1000) width = 1000;
+                this.$svg.find('path').attr('d','M0,0 l'+ width +',100 v240 L0,600 z');
+            },
+            setScrollPosition: function() {
+            var scrollLength = this.$window.scrollTop(),
+                sectionNum = Math.ceil(scrollLength/this.containerHeight),
+                translatePosition = scrollLength;
+            if(translatePosition >= this.containerHeight){
+                translatePosition -= this.containerHeight * (sectionNum-1);
+            }
+            this.$img.css({'transform': 'translate(0, ' + translatePosition/4 + 'px)'});
+            }
+        }
+
+        $(window).on('load',function(){
+            SAMPLE.init();
+        });
+    </script>
   </body>
 </html>
