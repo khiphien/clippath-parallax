@@ -5,7 +5,14 @@
 body {
   margin: 0;
 }
-#img {
+#img1 {
+  display: block;
+  -webkit-clip-path: url(#clipping);
+  clip-path: url(#clipping);
+  position: relative;
+  overflow: hidden;
+}
+#img2 {
   display: block;
   -webkit-clip-path: url(#clipping);
   clip-path: url(#clipping);
