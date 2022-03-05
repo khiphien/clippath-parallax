@@ -16,8 +16,9 @@
                 </clipPath>
             </defs>
             <g id="img">
-                    <image width="100%" height="150%" y="-50%" xlink:href="https://dl.dropbox.com/s/4amw0vilxbty9tx/dove-2680487_1920.jpg?dl=0" preserveAspectRatio="xMidYMid slice"></image>
-            </g>
+<!--                 <image width="100%" height="150%" y="-50%" xlink:href="https://dl.dropbox.com/s/4amw0vilxbty9tx/dove-2680487_1920.jpg?dl=0" preserveAspectRatio="xMidYMid slice"></image> -->
+            <img width="100%" height="150%" src="https://dl.dropbox.com/s/4amw0vilxbty9tx/dove-2680487_1920.jpg?dl=0">
+          </g>
         </svg>
         <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="600" baseProfile="full" version="1.2">
             <image width="100%" height="150%" y="-50%" xlink:href="https://dl.dropbox.com/s/4amw0vilxbty9tx/dove-2680487_1920.jpg?dl=0" preserveAspectRatio="xMidYMid slice" />
@@ -65,8 +66,7 @@
                 if(translatePosition >= this.containerHeight){
                     translatePosition -= this.containerHeight * (sectionNum-1);
                 }
-                //this.$img.css({'transform': 'translate(0, ' + translatePosition/2 + 'px)'});
-                this.$img.attr('y', translatePosition/2 + 'px')
+                this.$img.css({'transform': 'translate(0, ' + translatePosition/2 + 'px)'});
             }
         }
 
