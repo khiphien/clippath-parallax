@@ -105,7 +105,6 @@ if (version === false) {
 window.appbrowser.prefix = hasPrefix();
 
 jQuery.noConflict();
-(function ($) {
     $(function () {
 
         var ieScroll = function() {
@@ -158,4 +157,3 @@ jQuery.noConflict();
         };*/
 
     });
-})(jQuery);
