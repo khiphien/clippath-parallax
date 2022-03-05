@@ -66,6 +66,7 @@
                     translatePosition -= this.containerHeight * (sectionNum-1);
                 }
                 this.$img.css({'transform': 'translate(0, ' + translatePosition/2 + 'px)'});
+                this.$img.css(window.appbrowser.prefix.css+'transform', 'translate3d(0px, '+translatePosition/2+'px, 0px');
             }
         }
 
