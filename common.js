@@ -1,4 +1,4 @@
-function($) {
+
     "use strict";
     var transitionEnd = function() {
             var el = document.createElement("fcvndev");
@@ -43,13 +43,9 @@ function($) {
 
     $(function() {
         $.support.transition = transitionEnd();
-
         $.support.animation = animationEnd();
-    });
-}(jQuery);
-
-$(document).ready(function() {
-    /* fix smoothscroll on IE - jumpy fixed background */
+        
+        /* fix smoothscroll on IE - jumpy fixed background */
     if (navigator.userAgent.match(/MSIE 10/i) || navigator.userAgent.match(/Trident\/7\./) || navigator.userAgent.match(/Edge\/12\./)) {
         $("body.ie-smoothscroll")
             .on("mousewheel", function(e) {
@@ -74,4 +70,4 @@ $(document).ready(function() {
                 if (delta !== null) window.scrollTo(0, offsetY - delta);
             });
     }
-});
+    });
