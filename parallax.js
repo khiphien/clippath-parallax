@@ -104,56 +104,53 @@ if (version === false) {
 
 window.appbrowser.prefix = hasPrefix();
 
-jQuery.noConflict();
-    $(function () {
+$(function () {
+    var ieScroll = function() {
+        if(window.appbrowser.name && window.appbrowser.version) {
+            if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
+            window.onmousewheel = document.onmousewheel = wheel;
 
-        var ieScroll = function() {
-            if(window.appbrowser.name && window.appbrowser.version) {
-                if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
-                window.onmousewheel = document.onmousewheel = wheel;
+            $(document).keydown(function (e) {
 
-                $(document).keydown(function (e) {
+                switch (e.which) {
+                    //up
+                    case 38:
+                        e.preventDefault();
+                        $('html, body').stop().animate({
+                            scrollTop: $(window).scrollTop() - distance
+                        }, time);
+                        break;
 
-                    switch (e.which) {
-                        //up
-                        case 38:
-                            e.preventDefault();
-                            $('html, body').stop().animate({
-                                scrollTop: $(window).scrollTop() - distance
-                            }, time);
-                            break;
-
-                        //down
-                        case 40:
-                            e.preventDefault();
-                            $('html, body').stop().animate({
-                                scrollTop: $(window).scrollTop() + distance
-                            }, time);
-                            break;
-                    }
-                });
-            }
-        };
-
-        var parallax = function ($ele, $threshold, scrollTop, viewportRevealed, callback) {
-            var _thresholdHeight = $threshold.height(),
-                _offsetTop = $threshold.offset().top;
-
-            if(viewportRevealed > _offsetTop && scrollTop < (_offsetTop + _thresholdHeight)) {
-                var _elementScrolled = scrollTop - ($threshold.offset().top),
-                _ratio = (_elementScrolled/_thresholdHeight);
-
-                window.requestAnimationFrame(function() {
-                    callback($ele, _ratio);
-                });
-            }
-        };
-
-        /*
-        var callback = function($ele, _ratio) {
-            window.requestAnimationFrame(function(_ratio) {
-                $ele.css(window.appbrowser.prefix.css+'transform', 'translate3d(0px, '+_ratio+'px, 0px');
+                    //down
+                    case 40:
+                        e.preventDefault();
+                        $('html, body').stop().animate({
+                            scrollTop: $(window).scrollTop() + distance
+                        }, time);
+                        break;
+                }
             });
-        };*/
+        }
+    };
 
-    });
+    var parallax = function ($ele, $threshold, scrollTop, viewportRevealed, callback) {
+        var _thresholdHeight = $threshold.height(),
+            _offsetTop = $threshold.offset().top;
+
+        if(viewportRevealed > _offsetTop && scrollTop < (_offsetTop + _thresholdHeight)) {
+            var _elementScrolled = scrollTop - ($threshold.offset().top),
+            _ratio = (_elementScrolled/_thresholdHeight);
+
+            window.requestAnimationFrame(function() {
+                callback($ele, _ratio);
+            });
+        }
+    };
+
+    /*
+    var callback = function($ele, _ratio) {
+        window.requestAnimationFrame(function(_ratio) {
+            $ele.css(window.appbrowser.prefix.css+'transform', 'translate3d(0px, '+_ratio+'px, 0px');
+        });
+    };*/
+});
